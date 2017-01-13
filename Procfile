@@ -1,1 +1,1 @@
-web: polymer-cli serve -p $PORT
+web: polymer serve -p $PORT -H 0.0.0.0
