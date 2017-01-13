@@ -1,1 +1,1 @@
-web: npm run polymer-cli serve
+web: polymer-cli serve -p $PORT
