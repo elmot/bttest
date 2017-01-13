@@ -10,7 +10,6 @@
     "polymer-cli": "latest"
   },
   "scripts": {
-    "start": "polymer serve",
     "postinstall": "bower install"
   }
 }
