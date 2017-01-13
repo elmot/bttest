@@ -16,6 +16,9 @@
             </platinum-bluetooth-service>
         </platinum-bluetooth-device>
         <button id="btn" on-click="_onButtonClick">Click</button>
+        <template is="dom-if" if="batteryLevel">
+          <p>Battery level is: [[batteryLevel]]%</p>
+        </template>
     </template>
 
     <script>
@@ -24,15 +27,14 @@
             is: 'bttest-app',
 
             properties: {
-
+              batteryLevel: Number
             },
             _onButtonClick: function () {
-
                 this.$.device.request().then(function () {
                     return this.$.batteryLevel.read().then(function (value) {
-                        console.log('Battery Level is ' + value.getUint8(0) + '%');
-                    });
-                })
+                        this.batteryLevel = value.getUint8(0);
+                    }.bind(this));
+                }.bind(this))
                 .catch(function (error) {
                     console.error(error)
                 });
