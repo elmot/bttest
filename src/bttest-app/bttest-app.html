@@ -11,13 +11,13 @@
         <h2>Bttest</h2>
         <platinum-bluetooth-device id="device" services-filter='["heart_rate"]'>
             <platinum-bluetooth-service id="service" service='heart_rate'>
-                <platinum-bluetooth-characteristic id="batteryLevel" characteristic='heart_rate'>
+                <platinum-bluetooth-characteristic id="heartRate" characteristic='heart_rate_measurement'>
                 </platinum-bluetooth-characteristic>
             </platinum-bluetooth-service>
         </platinum-bluetooth-device>
         <button id="btn" on-click="_onButtonClick">Click</button>
-        <template is="dom-if" if="batteryLevel">
-          <p>Battery level is: [[batteryLevel]]%</p>
+        <template is="dom-if" if="[[heartRate]]">
+          <p>Heart rate is: [[heartRate]]%</p>
         </template>
     </template>
 
@@ -27,12 +27,12 @@
             is: 'bttest-app',
 
             properties: {
-              batteryLevel: Number
+              heartRate: Number
             },
             _onButtonClick: function () {
                 this.$.device.request().then(function () {
-                    return this.$.batteryLevel.read().then(function (value) {
-                        this.batteryLevel = value.getUint8(0);
+                    return this.$.heartRate.read().then(function (value) {
+                        this.heartRate = value.getUint8(0);
                     }.bind(this));
                 }.bind(this))
                 .catch(function (error) {
