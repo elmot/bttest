@@ -6,7 +6,8 @@
     "node": "6.9.4"
   },
   "dependencies": {
-    "bower": "latest"
+    "bower": "latest",
+    "polymer-cli": "latest"
   },
   "scripts": {
     "start": "polymer serve",
