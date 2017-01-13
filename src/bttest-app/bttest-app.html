@@ -30,7 +30,7 @@
               heartRate: Number
             },
             _parseHeartRate: function(e) {
-              this.heartRate = e.detail.value.getUint8();
+              this.heartRate = new Uint8Array(e.detail.value.buffer)[1];
             },
             _onButtonClick: function () {
                 this.$.device.request().then(function () {
