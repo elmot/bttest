@@ -1,0 +1,7 @@
+{
+  "name": "bttest",
+  "short_name": "bttest",
+  "description": "Web Bluetooth Demo",
+  "start_url": "/",
+  "display": "standalone"
+}
