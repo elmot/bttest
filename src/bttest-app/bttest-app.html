@@ -1,27 +1,43 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/platinum-bluetooth/platinum-bluetooth-elements.html">
 
 <dom-module id="bttest-app">
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello [[prop1]]</h2>
-  </template>
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+        <h2>Bttest</h2>
+        <platinum-bluetooth-device id="device" services-filter='["battery_service"]'>
+            <platinum-bluetooth-service id="service" service='battery_service'>
+                <platinum-bluetooth-characteristic id="batteryLevel" characteristic='battery_level'>
+                </platinum-bluetooth-characteristic>
+            </platinum-bluetooth-service>
+        </platinum-bluetooth-device>
+        <button id="btn" on-click="_onButtonClick">Click</button>
+    </template>
 
-  <script>
-    Polymer({
+    <script>
+        Polymer({
 
-      is: 'bttest-app',
+            is: 'bttest-app',
 
-      properties: {
-        prop1: {
-          type: String,
-          value: 'bttest-app',
-        },
-      },
+            properties: {
 
-    });
-  </script>
+            },
+            _onButtonClick: function () {
+
+                this.$.device.request().then(function () {
+                    return this.$.batteryLevel.read().then(function (value) {
+                        console.log('Battery Level is ' + value.getUint8(0) + '%');
+                    });
+                })
+                .catch(function (error) {
+                    console.error(error)
+                });
+            }
+
+        });
+    </script>
 </dom-module>
