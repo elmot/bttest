@@ -11,7 +11,7 @@
         <h2>Bttest</h2>
         <platinum-bluetooth-device id="device" services-filter='["heart_rate"]'>
             <platinum-bluetooth-service id="service" service='heart_rate'>
-                <platinum-bluetooth-characteristic id="heartRate" characteristic='heart_rate_measurement'>
+                <platinum-bluetooth-characteristic id="heartRate" characteristic='00002a37-0000-1000-8000-00805f9b34fb'>
                 </platinum-bluetooth-characteristic>
             </platinum-bluetooth-service>
         </platinum-bluetooth-device>
@@ -32,6 +32,7 @@
             _onButtonClick: function () {
                 this.$.device.request().then(function () {
                     return this.$.heartRate.read().then(function (value) {
+                        console.log(value);
                         this.heartRate = value.getUint8(0);
                     }.bind(this));
                 }.bind(this))
